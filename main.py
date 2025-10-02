@@ -31,7 +31,20 @@ def create_container(database):
         print(f"O contêiner '{CONTAINER_NAME}'já existe.")
     return container
 
+#Criar item no contêiner
+def create_item(container):
+    item = {
+        "id": "2",
+        "ProductID": "1",
+        "ProductName": "Harry Potter and the Philosopher's Stone",
+        "author": "J.K. Rowling",
+        "price": 9.99
+    }
+
+    container.create_item(body=item)
+    print("Iterm criado com sucesso!")
 
 
 database = create_database()
-create_container(database)
+container = create_container(database)
+create_item(container)
