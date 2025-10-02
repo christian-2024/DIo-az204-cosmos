@@ -21,6 +21,17 @@ def create_database():
         print(f"Banco de dados '{DATABASE}' já existe.")
     return database
 
+#Criar um contêiner
+def create_container(database):
+    try:
+        container = database.create_container(id=CONTAINER_NAME, partition_key=PartitionKey(path="/id"))
+        print(f"O contêiner '{container.id}' criado com sucesso ")
+    except exceptions.CosmosResourceExistsError:
+        container = database.get_container_client(CONTAINER_NAME)
+        print(f"O contêiner '{CONTAINER_NAME}'já existe.")
+    return container
+
 
 
 database = create_database()
+create_container(database)
