@@ -44,7 +44,19 @@ def create_item(container):
     container.create_item(body=item)
     print("Iterm criado com sucesso!")
 
+#Realizar Update Item
 
-database = create_database()
-container = create_container(database)
-create_item(container)
+def update_item(container):
+    item = container.read_item(item="1", partition_key="1")
+    item["price"] = 19.99
+    container.upsert_item(body=item)
+    print("Item atualizado com sucesso!")
+
+   
+
+if __name__ == "__main__":
+    database = create_database()
+    container = create_container(database)
+
+#create_item(container)
+update_item(container)
