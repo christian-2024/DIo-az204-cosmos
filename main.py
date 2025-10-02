@@ -17,7 +17,10 @@ def create_database():
         database = client.create_database(id=DATABASE)
         print(f"Database '{database.id}' criado com sucesso ")
     except exceptions.CosmosResourceExistsError:
+        database = client.get_database_client(DATABASE)
         print(f"Banco de dados '{DATABASE}' já existe.")
     return database
 
-create_database()
+
+
+database = create_database()
