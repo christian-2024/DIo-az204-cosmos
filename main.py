@@ -32,14 +32,8 @@ def create_container(database):
     return container
 
 #Criar item no contêiner
-def create_item(container):
-    item = {
-        "id": "2",
-        "ProductID": "1",
-        "ProductName": "Harry Potter and the Philosopher's Stone",
-        "author": "J.K. Rowling",
-        "price": 9.99
-    }
+def create_item(container, item):
+    
 
     container.create_item(body=item)
     print("Iterm criado com sucesso!")
@@ -52,11 +46,36 @@ def update_item(container):
     container.upsert_item(body=item)
     print("Item atualizado com sucesso!")
 
-   
+#Realizar delete de Itens
+def delete_item(container):
+    container.delete_item(item="1", partition_key="1")
+    print("Item excluído com sucesso!")
+
+#Lendo todos os Items
+def read_items(container):
+    items = container.read_all_items()
+    for item in items:
+        print(item)  
+
+#Lei item pelo ID
+def read_item(container):
+    item = container.read_item(item="2", partition_key="1")
+    print(item)          
 
 if __name__ == "__main__":
     database = create_database()
     container = create_container(database)
 
-#create_item(container)
-update_item(container)
+item = {
+        "id": "3",
+        "ProductID": "1",
+        "ProductName": "Senhor dos Aneis",
+        "author": "Não encontrado",
+        "price": 19.99
+    }    
+
+#create_item(container, item)
+#update_item(container)
+#delete_item(container)
+#read_items(container)
+read_item(container)
